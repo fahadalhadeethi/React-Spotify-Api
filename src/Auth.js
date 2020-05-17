@@ -7,19 +7,17 @@ export function test(){
    var index  =  Hash.indexOf("access_token=")
   var index1 = Hash.indexOf("&")
   var   auth = Hash.substring(index+13,index1)
-     //  if (_token) {
-        //   console.log(window.loc)
-        //   console.log( _token1)
-         // Set token
-       
+   
+        
         return auth = Hash.substring(index+13,index1)
-        // this.getCurrentlyPlaying(_token);
-      // }
+       
  
-    
+     
+}
+export function deletehash(){
+window.location.hash = ""
 }
 
 
-export  const  Usercontext = React.createContext()
 
 export default test

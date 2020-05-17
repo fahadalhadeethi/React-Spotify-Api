@@ -1,33 +1,36 @@
 import React, { Component } from "react";
 import * as $ from "jquery";
 import { authEndpoint, clientId, redirectUri, scopes } from "./config";
-import {test,Usercontext} from "./Auth"
+import {test,Usercontext,deletehash} from "./Auth"
 import Listitems from "./listitems";
 
 
 class Search extends Component {
  constructor() {
     super();
+    if(window.location.hash!="")
     localStorage.setItem('session',test());
     this.state = {
         token: localStorage.getItem('session'),
         item: [],
         lastsearch : ""
        
-    //  this.getCurrentlyPlaying = this.getCurrentlyPlaying.bind(this);
+
             }
+           deletehash()
          
            
             this.inputref =React.createRef()
-    // console.log(index,index1)
-   //  console.log(acc)
+  
 }
+
   componentDidMount() {
-    // Set token
+
 
     if(localStorage.getItem("lastsearch")!="")
     this.getCurrentlyPlaying(this.state.token,localStorage.getItem("lastsearch"))
-  //  let _token1 = hash.access_token;
+    
+
 
   }
   
@@ -42,7 +45,7 @@ class Search extends Component {
       return
     }
     
-    // Make a call using the token
+
     $.ajax({
         
        
@@ -67,39 +70,61 @@ class Search extends Component {
   }
   changed = () =>{
   
-   // console.log(acc)
+  
   
   localStorage.setItem('lastsearch',this.inputref.current.value);
     console.log("done",this.state.token)
        this.getCurrentlyPlaying(this.state.token,this.inputref.current.value)
           
-      // this.setState({item : "waw"})
+     
   }
 
   render() {
-  
-    return (
+          if(localStorage.getItem("session")===""){
+            return (
  
      
           
-           <div style={{margin:"5px"}} >
-               <div class="input-group mb-3">
-        
-   
-  <input type="text" ref={this.inputref} onChange={this.changed} className="form-control" placeholder="Search for an Artist..." aria-label="Username" value={localStorage.getItem("lastsearch")}
-  aria-describedby="basic-addon1"/>
-                </div>
-   <Listitems  list={this.state.item}/>
-           </div>
-
-       
-        
-       
+              <div style={{margin:"5px"}} >
+                  <div class="input-group mb-3">
+           
       
-    );
+     <input type="text" ref={this.inputref} onChange={this.changed} className="form-control" placeholder="Search for an Artist..." aria-label="Username" value={localStorage.getItem("lastsearch")}
+     aria-describedby="basic-addon1" disabled/>
+                   </div>
+      <Listitems  list={this.state.item}/>
+              </div>
+   
+          
+           
+          
+         
+       );
+          }else{
+            return (
+ 
+     
+          
+              <div style={{margin:"5px"}} >
+                  <div class="input-group mb-3">
+           
+      
+     <input type="text" ref={this.inputref} onChange={this.changed} className="form-control" placeholder="Search for an Artist..." aria-label="Username" value={localStorage.getItem("lastsearch")}
+     aria-describedby="basic-addon1"/>
+                   </div>
+      <Listitems  list={this.state.item}/>
+              </div>
+   
+          
+           
+          
+         
+       );
+          }
+    
     
   }
  
 }
-Search.contextType= Usercontext
+
 export default Search;

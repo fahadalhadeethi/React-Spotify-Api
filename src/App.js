@@ -10,7 +10,7 @@ function App() {
   return (
     <div >
     
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
+       
     <Route exact path="/" component={Login}></Route>
     <Route path="/login" component={Login}></Route>
     <Route path="/Search" component={Search}></Route>
